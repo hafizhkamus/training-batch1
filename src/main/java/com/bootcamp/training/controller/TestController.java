@@ -1,11 +1,15 @@
 package com.bootcamp.training.controller;
 
-import java.util.Random;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.bootcamp.training.dto.TestDTO;
+import com.bootcamp.training.service.TestService;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,15 +20,14 @@ import lombok.Setter;
 @RequestMapping(path = "/test")
 public class TestController {
 
-    private final Random random = new Random();
+    @Autowired
+    private TestService testService;
 
     @GetMapping("/api/greet/json")
     public GreetingResponse greetJson(
             @RequestParam(name = "name", defaultValue = "Guest") String name,
             @RequestParam(name = "age", defaultValue = "20") Integer age) {
         GreetingResponse hilman = new GreetingResponse();
-        // hilman.setName(name + " KELAS B");
-        // hilman.setAge(age + 180);
         return hilman;
     }
     
@@ -43,6 +46,7 @@ public class TestController {
         return hilman2.getName();
     }
 
+    
     @NoArgsConstructor
     @AllArgsConstructor
     @Getter
@@ -50,5 +54,10 @@ public class TestController {
     public static class GreetingResponse {
         private String name;
         private int age;
+    }
+
+    @PostMapping("/api/analisis-profesi")
+    public TestDTO.ProfesiResponse analisisProfesi(@RequestBody TestDTO.DataSiswaRequest request) {
+        return testService.analisis(request);
     }
 }
