@@ -34,7 +34,7 @@ public class NilaiMurid {
     @Column(name = "id_murid", nullable = false)
     private Long idMurid;
 
-    @Column(name = "nilai", precision = 10, scale = 2)
+    @Column(name = "nilai", columnDefinition = "NUMERIC(10,2)")
     private Double nilai;
 
     @Column(name = "semester", nullable = false)
