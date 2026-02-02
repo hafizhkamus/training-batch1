@@ -8,7 +8,7 @@ import com.bootcamp.training.dto.TestDTO.ProfesiKesimpulan;
 @Service
 public class TestService {
         
-    public TestDTO.ProfesiResponse analisis(TestDTO.DataSiswaRequest request) {
+    public TestDTO.ProfesiResponse analisisMurid(TestDTO.DataSiswaRequest request) {
         TestDTO.ProfesiKesimpulan kesimpulan = tentukanProfesi(request.getUmur(), request.getNilaiRataRata());
         
         return new TestDTO.ProfesiResponse(
@@ -19,11 +19,16 @@ public class TestService {
         );
     }
     
-    private ProfesiKesimpulan tentukanProfesi(int umur, double nilaiRataRata) {
+    public ProfesiKesimpulan tentukanProfesi(int umur, double nilaiRataRata) {
         boolean dokter = nilaiRataRata >= 85 && umur <= 25;
         boolean guru = nilaiRataRata >= 90 && umur <= 20;
         boolean chef = nilaiRataRata >= 75 && umur >= 35;
         
-        return new ProfesiKesimpulan(dokter, guru, chef);
+        ProfesiKesimpulan kesimpulan = new ProfesiKesimpulan();
+        kesimpulan.setDokter(dokter);
+        kesimpulan.setGuru(guru);
+        kesimpulan.setChef(chef);
+        
+        return kesimpulan;
     }
 }

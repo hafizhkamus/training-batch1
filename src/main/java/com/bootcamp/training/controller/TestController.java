@@ -56,8 +56,9 @@ public class TestController {
         private int age;
     }
 
+
     @PostMapping("/api/analisis-profesi")
     public TestDTO.ProfesiResponse analisisProfesi(@RequestBody TestDTO.DataSiswaRequest request) {
-        return testService.analisis(request);
+        return testService.analisisMurid(request);
     }
 }
